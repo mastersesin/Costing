@@ -13,7 +13,6 @@ def index():
     return jsonify(landing.view())
 
 
-@costing.route('/product', methods=['GET'])
+@costing.route('/productsetting', methods=['GET'])
 def get_product():
-    print(product.view())
     return jsonify(product.view())

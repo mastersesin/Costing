@@ -2,7 +2,7 @@ from AppFolder import session
 from AppFolder.SqlClasses.models import *
 
 query_string_product = ['difficulty_type', 'product_type', 'design_type',
-                        'brand', 'finish_color', 'lacquering_type',
+                        'brand', 'finish_color', 'lacquering_type', 'setting_type',
                         {'cnc': ['cnc_size', 'cnc_type']},
                         {'material': ['material', 'material_rate']}]
 

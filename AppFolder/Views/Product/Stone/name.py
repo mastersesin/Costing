@@ -9,5 +9,3 @@ def view():
     return_data['stones'] = [record.component_product_name for record in query_record]
     return return_data
 
-
-print(view())
