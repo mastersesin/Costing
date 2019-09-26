@@ -27,3 +27,16 @@ def calculator(calculate_what=None):
         require_params = stone.view.__code__.co_varnames[:stone.view.__code__.co_argcount]
         msg['msg'] = [x for x in require_params]
         return jsonify(msg)
+    elif request.method == 'POST' and calculate_what == 'stone' and request.is_json:
+        stone_name = request.json.get('stone_name', None)
+        stone_amount_of_unit_of_measure = request.json.get('stone_amount_of_unit_of_measure', None)
+        setting_type_string = request.json.get('setting_type_string', None)
+        stone_quantity = request.json.get('stone_quantity', None)
+        if stone_name and stone_amount_of_unit_of_measure and setting_type_string and stone_quantity:
+            msg = ReturnMSG().stonecost
+            msg['msg'] = stone.view(stone_name, float(stone_amount_of_unit_of_measure), float(stone_quantity), setting_type_string)
+            return jsonify(msg)
+        else:
+            return 'Something wrong'
+    else:
+        return 'METHOD ERR'

@@ -26,6 +26,10 @@ class ReturnMSG:
         self.order_not_exist = {"code": 25, "msg": "Order not exist"}
         self.login_proposal_not_yet_accepted = {"code": 26, "msg": "Login proposal not yet accepted"}
         self.doc = {"code": 27, "msg": ""}
+        self.stonecost = {'code': 28, 'msg': ''}
+
+    def stonecost(self):
+        return self.stonecost
 
     def doc(self):
         return self.doc
