@@ -1,24 +1,10 @@
 # Calculator for Stone Cost
 from AppFolder import session
 from AppFolder.SqlClasses.models import *
+from AppFolder.UsefulTools import getprice, getstandardweight, getlaborcost
 
 
 def view(stone_name: str, stone_amount_of_unit_of_measure: float, stone_quantity: int, setting_type_string: str):
-    def get_standard_weight():
-        query_record = session.query(ComponentPrice) \
-            .filter(ComponentPrice.component_product_name == stone_name).first()
-        if query_record:
-            return float(query_record.standard_weight)
-        else:
-            return False
-
-    def get_component_price():
-        query_record = session.query(ComponentPrice) \
-            .filter(ComponentPrice.component_product_name == stone_name).first()
-        if query_record:
-            return float(query_record.component_price_per_uom)
-        else:
-            return False
 
     def convert_setting_type_string_to_setting_id():
         query_record = session.query(CostAttributes) \
@@ -40,23 +26,14 @@ def view(stone_name: str, stone_amount_of_unit_of_measure: float, stone_quantity
         else:
             return False
 
-    def get_stone_labor_cost(x, y):
-        query_record = session.query(CostAttributeValues) \
-            .filter(CostAttributeValues.x_attribute_id == x) \
-            .filter(CostAttributeValues.y_attribute_id == y) \
-            .first()
-        if query_record:
-            return float(query_record.attribute_value)
-        else:
-            return False
-
-    if isinstance(get_standard_weight(), float) and isinstance(get_component_price(), float):
+    if isinstance(getstandardweight.get_standard_weight(stone_name), float) \
+            and isinstance(getprice.get_price(stone_name), float):
         # Stone Cost
-        component_weight_in_gram = get_standard_weight() * stone_amount_of_unit_of_measure
-        single_component_cost = component_weight_in_gram * get_component_price()
+        component_weight_in_gram = getstandardweight.get_standard_weight(stone_name) * stone_amount_of_unit_of_measure
+        single_component_cost = component_weight_in_gram * getprice.get_price(stone_name)
         total_stone_cost = single_component_cost * stone_quantity
         # Stone Labor Cost
-        total_stone_labor_cost = get_stone_labor_cost(
+        total_stone_labor_cost = getlaborcost.get_labor_cost(
             convert_setting_type_string_to_setting_id(),
             get_material_id_of_stone()
         )
@@ -68,4 +45,4 @@ def view(stone_name: str, stone_amount_of_unit_of_measure: float, stone_quantity
         }
 
 
-# view("AGB_FL-082B-856089_9.0H3.0_C2", 1, 1, "Prong / Bezel /Nick / Pressure Hand Set")
+# print(view("AGB_FL-082B-856089_9.0H3.0_C2", 1, 1, "Prong / Bezel /Nick / Pressure Hand Set"))

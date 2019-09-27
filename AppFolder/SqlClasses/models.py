@@ -1,6 +1,6 @@
 from AppFolder import Base
 from AppFolder.UsefulTools import timestamp
-from sqlalchemy import Column, Integer, String, LargeBinary, ForeignKey, REAL, Numeric, DateTime
+from sqlalchemy import Column, Integer, String, LargeBinary, ForeignKey, REAL, Numeric, DateTime, DECIMAL
 from datetime import datetime
 
 
@@ -63,16 +63,16 @@ class ProductCostComponent(Base):
     sourcing_type_id = Column(Integer, nullable=False, default=0)
     material_id = Column(Integer, nullable=False, default=0)
     material_rate = Column(Integer, nullable=False, default=1)
-    material_price_per_uom = Column(Numeric(8, 3), nullable=False, default=0)
+    material_price_per_uom = Column(DECIMAL(8, 3), nullable=False, default=0)
     operation_type_id = Column(Integer, nullable=False, default=0)
     quantity_component_quantity = Column(Numeric(8, 3), nullable=False, default=0)
     quantity_unit_of_measure = Column(String, nullable=False, default='pc')
-    component_price_per_uom = Column(Numeric(8, 3), nullable=False, default=0)
+    component_price_per_uom = Column(DECIMAL(8, 3), nullable=False, default=0)
     component_price = Column(Numeric(8, 3), nullable=False, default=0)
     currency = Column(String, nullable=False, default='USD')
     usd_exchange_rate = Column(Numeric(8, 3), nullable=False, default=1)
-    standard_weight = Column(Numeric(8, 3), nullable=False, default=0)
-    standard_metal_weight = Column(Numeric(8, 3), nullable=False, default=0)
+    standard_weight = Column(DECIMAL(8, 3), nullable=False, default=0)
+    standard_metal_weight = Column(DECIMAL(8, 3), nullable=False, default=0)
     weight_unit_of_measure = Column(String, nullable=False, default='g')
     create_by = Column(String, nullable=False)
     create_on = Column(Integer, nullable=False, default=timestamp.current_time_stamp())
@@ -97,11 +97,11 @@ class ComponentPrice(Base):
     quantity_unit_of_measure = Column(String, nullable=False, default='pc')
     material_id = Column(Integer, nullable=False, default=0)
     material_rate = Column(Integer, nullable=False, default=1)
-    material_price_per_uom = Column(Numeric(8, 3), nullable=False, default=0)
-    component_price_per_uom = Column(Numeric(8, 3), nullable=False, default=0)
+    material_price_per_uom = Column(DECIMAL(8, 3), nullable=False, default=0)
+    component_price_per_uom = Column(DECIMAL(8, 3), nullable=False, default=0)
     currency = Column(String, nullable=False, default='USD')
-    standard_weight = Column(Numeric(8, 3), nullable=False, default=0)
-    standard_metal_weight = Column(Numeric(8, 3), nullable=False, default=0)
+    standard_weight = Column(DECIMAL(8, 3), nullable=False, default=0)
+    standard_metal_weight = Column(DECIMAL(8, 3), nullable=False, default=0)
     weight_unit_of_measure = Column(String, nullable=False, default='g')
     component_sort_id = Column(Integer, nullable=False, default=0)
     create_by = Column(String, default='admin')
