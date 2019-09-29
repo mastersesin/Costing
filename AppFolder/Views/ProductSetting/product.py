@@ -1,7 +1,10 @@
 from AppFolder import session
+from AppFolder.Views.ProductSetting.Stone import name as stonename
+from AppFolder.Views.ProductSetting.Finding import name as findingname
+from AppFolder.Views.ProductSetting.Metal import name as alloyname
 from AppFolder.SqlClasses.models import *
 
-query_string_product = ['difficulty_type', 'product_type', 'design_type',
+query_string_product = ['difficulty_type', 'product_type', 'design_type', 'plating_type',
                         'brand', 'finish_color', 'lacquering_type', 'setting_type',
                         {'cnc': ['cnc_size', 'cnc_type']},
                         {'material': ['material', 'material_rate']}]
@@ -31,4 +34,10 @@ def view():
                 except KeyError:
                     return_data[data] = []
                     return_data[data].append(attribute.attribute_shrot_text)
+    stone_name = stonename.view()
+    finding_name = findingname.view()
+    alloy_name = alloyname.view()
+    return_data['stone_name'] = stone_name['stone_name']
+    return_data['finding_name'] = finding_name['finding_name']
+    return_data['alloy_name'] = alloy_name['alloy_name']
     return return_data

@@ -2,9 +2,11 @@
 from AppFolder import session
 from AppFolder.SqlClasses.models import *
 from AppFolder.UsefulTools import getprice, getstandardweight, getlaborcost
+from AppFolder.UsefulTools import getattributeid
 
 
-def view(stone_name: str, stone_amount_of_unit_of_measure: float, stone_quantity: int, setting_type_string: str):
+def view(stone_name: str, stone_amount_of_unit_of_measure: float,
+         stone_quantity: int, setting_type_string: str, material_string: str):
 
     def convert_setting_type_string_to_setting_id():
         query_record = session.query(CostAttributes) \
@@ -35,7 +37,10 @@ def view(stone_name: str, stone_amount_of_unit_of_measure: float, stone_quantity
         # Stone Labor Cost
         total_stone_labor_cost = getlaborcost.get_labor_cost(
             convert_setting_type_string_to_setting_id(),
-            get_material_id_of_stone()
+            getattributeid.convert_attribute_name_to_attribute_id(
+                attribute_name='material',
+                attribute_description_text=material_string
+            )
         )
         final_stone_cost = total_stone_cost + total_stone_labor_cost
         return {
@@ -45,4 +50,4 @@ def view(stone_name: str, stone_amount_of_unit_of_measure: float, stone_quantity
         }
 
 
-# print(view("AGB_FL-082B-856089_9.0H3.0_C2", 1, 1, "Prong / Bezel /Nick / Pressure Hand Set"))
+#print(view("AMG_CSRC_8X8_B2", 0.99, 1, "Pave", "Gold"))
