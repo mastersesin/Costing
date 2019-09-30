@@ -31,8 +31,7 @@ def view(stone_name: str, stone_amount_of_unit_of_measure: float,
     if isinstance(getstandardweight.get_standard_weight(stone_name), float) \
             and isinstance(getprice.get_price(stone_name), float):
         # Stone Cost
-        component_weight_in_gram = getstandardweight.get_standard_weight(stone_name) * stone_amount_of_unit_of_measure
-        single_component_cost = component_weight_in_gram * getprice.get_price(stone_name)
+        single_component_cost = stone_amount_of_unit_of_measure * getprice.get_price(stone_name)
         total_stone_cost = single_component_cost * stone_quantity
         # Stone Labor Cost
         total_stone_labor_cost = getlaborcost.get_labor_cost(
