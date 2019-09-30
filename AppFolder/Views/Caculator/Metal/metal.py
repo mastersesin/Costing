@@ -9,8 +9,9 @@ def view(product_type: str, difficulty_type: str, finish_color: str,
         return x_coordinate_f
 
     # Metal Cost
+    lost_rate = 1.05  # 5%
     component_weight_in_gram = alloy_amount_of_unit_of_measure
-    single_component_cost = component_weight_in_gram * getprice.get_price(alloy_name)
+    single_component_cost = component_weight_in_gram * lost_rate * getprice.get_price(alloy_name)
     total_casting_cost = single_component_cost * alloy_quantity
     # Metal labor cost
     product_type_id = getattributeid.convert_attribute_name_to_attribute_id('product_type', product_type)
