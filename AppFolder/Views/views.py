@@ -37,15 +37,13 @@ def calculator_detail(calculate_what=None):
         return jsonify(msg)
     elif request.method == 'POST' and calculate_what == 'stone' and request.is_json:
         stone_name = request.json.get('stone_name', None)
-        stone_amount_of_unit_of_measure = request.json.get('stone_amount_of_unit_of_measure', None)
         setting_type_string = request.json.get('setting_type_string', None)
         stone_quantity = request.json.get('stone_quantity', None)
         material = request.json.get('material_string', None)
-        if stone_name and stone_amount_of_unit_of_measure and setting_type_string and stone_quantity and material:
+        if stone_name and setting_type_string and stone_quantity and material:
             msg = ReturnMSG().stonecost
             msg['msg'] = stone.view(
                 stone_name,
-                float(stone_amount_of_unit_of_measure),
                 int(stone_quantity),
                 setting_type_string,
                 material
@@ -55,27 +53,24 @@ def calculator_detail(calculate_what=None):
             return 'Something wrong'
     elif request.method == 'POST' and calculate_what == 'finding' and request.is_json:
         finding_name = request.json.get('finding_name', None)
-        finding_amount_of_unit_of_measure = request.json.get('finding_amount_of_unit_of_measure', None)
         finding_quantity = request.json.get('finding_quantity', None)
-        if finding_name and finding_amount_of_unit_of_measure and finding_quantity:
+        if finding_name and finding_quantity:
             msg = ReturnMSG().stonecost
-            msg['msg'] = finding.view(finding_name, float(finding_amount_of_unit_of_measure), int(finding_quantity))
+            msg['msg'] = finding.view(finding_name, int(finding_quantity))
             return jsonify(msg)
         else:
             return 'Something wrong'
     elif request.method == 'POST' and calculate_what == 'metal' and request.is_json:
         alloy_name = request.json.get('alloy_name', None)
-        alloy_amount_of_unit_of_measure = request.json.get('alloy_amount_of_unit_of_measure', None)
         alloy_quantity = request.json.get('alloy_quantity', None)
         product_type = request.json.get('product_type', None)
         difficulty_type = request.json.get('difficulty_type', None)
         finish_color = request.json.get('finish_color', None)
-        if alloy_name and alloy_amount_of_unit_of_measure and alloy_quantity and product_type \
+        if alloy_name and alloy_quantity and product_type \
                 and difficulty_type and finish_color:
             msg = ReturnMSG().stonecost
             msg['msg'] = metal.view(
                 alloy_name=alloy_name,
-                alloy_amount_of_unit_of_measure=float(alloy_amount_of_unit_of_measure),
                 alloy_quantity=int(alloy_quantity),
                 product_type=product_type,
                 difficulty_type=difficulty_type,

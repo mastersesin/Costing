@@ -9,15 +9,15 @@ def view(product_type_string: str, difficulty_type_string: str, plating_type_str
 
     product_type_id = getattributeid.convert_attribute_name_to_attribute_id(
         attribute_name='product_type',
-        attribute_description_text=product_type_string
+        attribute_text=product_type_string
     )
     difficulty_type_id = getattributeid.convert_attribute_name_to_attribute_id(
         attribute_name='difficulty_type',
-        attribute_description_text=difficulty_type_string
+        attribute_text=difficulty_type_string
     )
     plating_type_id = getattributeid.convert_attribute_name_to_attribute_id(
         attribute_name='plating_type',
-        attribute_description_text=plating_type_string
+        attribute_text=plating_type_string
     )
     x_coordinate = get_x_coordinate(product_type_id_f=product_type_id, difficulty_type_id_f=difficulty_type_id)
     y_coordinate = plating_type_id
@@ -31,4 +31,4 @@ def view(product_type_string: str, difficulty_type_string: str, plating_type_str
 
 
 # EXAMPLE
-print(view(product_type_string='Necklace', difficulty_type_string='Simple', plating_type_string='AG10'))
+# print(view(product_type_string='Necklace', difficulty_type_string='Simple', plating_type_string='AG10'))

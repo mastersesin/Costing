@@ -1,9 +1,10 @@
 from AppFolder.UsefulTools import getlaborcost, getprice, getstandardweight
 
 
-def view(finding_name: str, finding_amount_of_unit_of_measure: float, finding_quantity: int):
+def view(finding_name: str, finding_quantity: int):
     if isinstance(getstandardweight.get_standard_weight(finding_name), float) \
             and isinstance(getprice.get_price(finding_name), float):
+        finding_amount_of_unit_of_measure = 1
         # Finding Cost
         component_weight_in_gram = getstandardweight.get_standard_weight(
             finding_name
@@ -23,4 +24,4 @@ def view(finding_name: str, finding_amount_of_unit_of_measure: float, finding_qu
         }
 
 
-# print(view('AFCHgSERPD0.65_18K', 0.005, 1))
+# print(view('AFCHgSERPD0.65_18K', 1))

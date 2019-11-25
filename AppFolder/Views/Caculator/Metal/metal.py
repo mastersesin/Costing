@@ -2,13 +2,14 @@ from AppFolder.UsefulTools import getattributeid, getlaborcost, getstandardweigh
 
 
 def view(product_type: str, difficulty_type: str, finish_color: str,
-         alloy_name: str, alloy_amount_of_unit_of_measure: float, alloy_quantity: int):
+         alloy_name: str, alloy_quantity: int):
     def get_x_coordinate(product_type_id_f, difficulty_type_id_f):
         x_coordinate_without_difficulty_type_id = product_type_id_f * 1000
         x_coordinate_f = x_coordinate_without_difficulty_type_id + difficulty_type_id_f
         return x_coordinate_f
 
-    # Metal Cost
+    # Metal Cost]
+    alloy_amount_of_unit_of_measure = 1
     lost_rate = 1.05  # 5%
     component_weight_in_gram = alloy_amount_of_unit_of_measure
     single_component_cost = component_weight_in_gram * lost_rate * getprice.get_price(alloy_name)
@@ -28,5 +29,5 @@ def view(product_type: str, difficulty_type: str, finish_color: str,
 
 
 # EXAMPLE
-print(view(product_type='Ring', difficulty_type='Simple', finish_color='Yellow',
-           alloy_name='CASTING585Y', alloy_amount_of_unit_of_measure=0.9, alloy_quantity=1))
+#print(view(product_type='Ring', difficulty_type='Simple', finish_color='Yellow',
+#           alloy_name='CASTING585Y', alloy_amount_of_unit_of_measure=0.9, alloy_quantity=1))

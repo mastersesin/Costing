@@ -10,7 +10,7 @@ from sqlalchemy.exc import SQLAlchemyError
 app = Flask(__name__)
 CORS(app)
 app.config['SECRET_KEY'] = 'trantrongtyckiuzk4ever!@#!!!@@##!*&%^$$#$'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://dishorder_PS:123456@10.1.1.11:5430/costing'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://dishorder_PS:123456@10.84.128.31:5430/costing'
 engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'], echo=False)
 Base = declarative_base()
 from AppFolder.SqlClasses import models

@@ -5,13 +5,11 @@ from AppFolder.UsefulTools import getprice, getstandardweight, getlaborcost
 from AppFolder.UsefulTools import getattributeid
 
 
-def view(stone_name: str, stone_amount_of_unit_of_measure: float,
-         stone_quantity: int, setting_type_string: str, material_string: str):
-
+def view(stone_name: str, stone_quantity: int, setting_type_string: str, material_string: str):
     def convert_setting_type_string_to_setting_id():
         query_record = session.query(CostAttributes) \
-            .filter(CostAttributes.attribute_text == 'setting_type') \
-            .filter(CostAttributes.attribute_shrot_text == setting_type_string) \
+            .filter(CostAttributes.attribute_name == 'setting_type') \
+            .filter(CostAttributes.attribute_text == setting_type_string) \
             .first()
         if query_record:
             return int(query_record.attribute_id)
@@ -30,6 +28,7 @@ def view(stone_name: str, stone_amount_of_unit_of_measure: float,
 
     if isinstance(getstandardweight.get_standard_weight(stone_name), float) \
             and isinstance(getprice.get_price(stone_name), float):
+        stone_amount_of_unit_of_measure = 1
         # Stone Cost
         single_component_cost = stone_amount_of_unit_of_measure * getprice.get_price(stone_name)
         total_stone_cost = single_component_cost * stone_quantity
@@ -38,7 +37,7 @@ def view(stone_name: str, stone_amount_of_unit_of_measure: float,
             convert_setting_type_string_to_setting_id(),
             getattributeid.convert_attribute_name_to_attribute_id(
                 attribute_name='material',
-                attribute_description_text=material_string
+                attribute_text=material_string
             )
         )
         final_stone_cost = total_stone_cost + total_stone_labor_cost
@@ -49,4 +48,4 @@ def view(stone_name: str, stone_amount_of_unit_of_measure: float,
         }
 
 
-#print(view("AMG_CSRC_8X8_B2", 0.99, 1, "Pave", "Gold"))
+print(view("AMG_CSRC_8X8_B2", 1, "Pave", "Gold"))

@@ -17,23 +17,23 @@ def view():
             for key, value in data.items():
                 for query_string in value:
                     query_record = session.query(CostAttributes) \
-                        .filter(CostAttributes.attribute_text == query_string).all()
+                        .filter(CostAttributes.attribute_name == query_string).all()
                     # Create return scaffold
                     try:
                         return_data[key].update({query_string: []})
                     except KeyError:  # Not yet have so we have to create it
                         return_data[key] = ({query_string: []})
                     for attribute in query_record:
-                        return_data[key][query_string].append(attribute.attribute_shrot_text)
-        else:
+                        return_data[key][query_string].append(attribute.attribute_text)
+        if isinstance(data, str):
             query_record = session.query(CostAttributes) \
-                .filter(CostAttributes.attribute_text == data).all()
+                .filter(CostAttributes.attribute_name == data).all()
             for attribute in query_record:
                 try:
-                    return_data[data].append(attribute.attribute_shrot_text)
+                    return_data[data].append(attribute.attribute_text)
                 except KeyError:
                     return_data[data] = []
-                    return_data[data].append(attribute.attribute_shrot_text)
+                    return_data[data].append(attribute.attribute_text)
     stone_name = stonename.view()
     finding_name = findingname.view()
     alloy_name = alloyname.view()
